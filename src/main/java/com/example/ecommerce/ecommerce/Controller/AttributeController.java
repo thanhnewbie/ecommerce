@@ -1,5 +1,6 @@
 package com.example.ecommerce.ecommerce.Controller;
 
+import com.example.ecommerce.ecommerce.DAO.AttributeGroup;
 import com.example.ecommerce.ecommerce.DTO.AttributeGroupDTO;
 import com.example.ecommerce.ecommerce.Repository.AttributeGroupRepository;
 import com.example.ecommerce.ecommerce.Service.AttributeGroupService;
@@ -38,10 +39,10 @@ public class AttributeController {
 //        return mappingJacksonValue;
 //    }
 
-    @GetMapping("categoryId")
-    public List<AttributeGroupDTO> getGroupAttributeByCateId(@RequestParam("id") Long id){// dùng đê lấy thuộc tính danh mục để thêm sản phẩm
-        return attributeGroupService.findAttributeGroupByCateId(id);
-    }
+//    @GetMapping("categoryId")
+//    public List<AttributeGroup> getGroupAttributeByCateId(@RequestParam("productId") Long productId, @RequestParam("cateId") Long cateId){// dùng đê lấy thuộc tính danh mục để thêm sản phẩm
+//        return attributeGroupService.findAttributeGroupDeepByCateId(productId, cateId);
+//    }
 
 
 }

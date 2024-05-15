@@ -1,5 +1,6 @@
 package com.example.ecommerce.ecommerce.DTO;
 
+import com.example.ecommerce.ecommerce.DAO.AttributeProduct;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,10 +13,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 //@JsonFilter("AttributeGroupDTOFilter")
 public class AttributeGroupDTO {
     Long id;
     String name;
     List<AttributeDTO> attributeDTOList;// dùng để hien thị tên thuộc tính ở trang thêm sản phẩm
+    List<AttributeProductDTO> attributeProductDTOList;
 }

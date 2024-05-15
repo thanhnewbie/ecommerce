@@ -9,5 +9,5 @@ import lombok.*;
 public class CategoryDTO {
     Long id;
     String name;
-    String thumbnail;
+
 }

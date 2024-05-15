@@ -1,7 +1,9 @@
 package com.example.ecommerce.ecommerce.DTO;
 
+import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDTO {
     @JsonIgnore
     Long id;
@@ -20,8 +23,7 @@ public class ProductDTO {
     String productInfo;
     String promotionInfo;
     List<GalleryDTO> galeryList;
-    List<AttributeProductGroupDTO> attributeProductGroupDTOList;
+    //List<AttributeProductGroupDTO> attributeProductGroupDTOList;
     List<SkuDTO> skuDTOList;
-
     List<AttributeProductDTO> attributeDisplayFistList;
 }

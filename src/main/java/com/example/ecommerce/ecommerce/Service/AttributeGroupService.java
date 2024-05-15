@@ -3,8 +3,7 @@ package com.example.ecommerce.ecommerce.Service;
 import com.example.ecommerce.ecommerce.DAO.AttributeGroup;
 import com.example.ecommerce.ecommerce.DAO.AttributeProduct;
 import com.example.ecommerce.ecommerce.DTO.AttributeGroupDTO;
-import com.example.ecommerce.ecommerce.DTO.AttributeProductDTO;
-import com.example.ecommerce.ecommerce.DTO.AttributeProductGroupDTO;
+import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
 import com.example.ecommerce.ecommerce.MapperConfig.MapperRemote;
 import com.example.ecommerce.ecommerce.Repository.AttributeGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +30,13 @@ public class AttributeGroupService {
                 .stream().map(mapperRemote::AttributeProductDTOToAttributeProduct).collect(Collectors.toList()));
         attributeProductList.forEach(e ->
         {
-            e.setAttributeGroup(attributeGroup);
+//            e.setAttributeGroup(attributeGroup);
             e.setProductName(null);
         });
 
         return attributeProductList;
     }
-    public List<AttributeGroupDTO> findAttributeGroupByCateId(Long id){
-        List<AttributeGroup> attributeGroupList = attributeGroupRepository.findAttributeGroupByCateId(id);
-        List<AttributeGroupDTO> attributeGroupDTOList = attributeGroupRepository.findAttributeGroupByCateId(id)
-                .stream().map(mapperRemote::AttributeGroupToAttributeGroupDTO).collect(Collectors.toList());
-        return attributeGroupDTOList;
-    }
+
 
 
 }

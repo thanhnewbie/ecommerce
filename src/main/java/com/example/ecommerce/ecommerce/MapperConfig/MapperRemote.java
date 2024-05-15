@@ -2,13 +2,11 @@ package com.example.ecommerce.ecommerce.MapperConfig;
 
 import com.example.ecommerce.ecommerce.DAO.*;
 import com.example.ecommerce.ecommerce.DTO.*;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
+import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
+import com.example.ecommerce.ecommerce.DTO.Custom.ProductOverviewDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapperRemote  {
@@ -29,51 +27,25 @@ public interface MapperRemote  {
     @Mapping(target = "galeryList", source = "entity.galleryList")
     public ProductDTO ProductToProductDTO(Product entity);
 
-    @Mapping(target = "attributeId", source = "id.attributeId")
-    @Mapping(target = "productId", source = "id.productId")
-    @Mapping(target = "name", source = "attributeName")
-    public AttributeProductDTO AttributeProductToAttributeProductDTO(AttributeProduct entity);
-
-    @Mapping(target = "attributeName", source = "name")
-    @Mapping(target = "id.attributeId", source = "attributeId")
-    @Mapping(target = "id.productId", source = "productId")
     public AttributeProduct AttributeProductDTOToAttributeProduct(AttributeProductDTO dto);
 
     @Mapping(target = "attributeDTOList", source = "attributeList")
-
+    @Mapping(target = "attributeProductDTOList", source = "attributeProductList")
     public AttributeGroupDTO AttributeGroupToAttributeGroupDTO(AttributeGroup entity);
 
-    @Mapping(target = "attributeProductDTOList", source = "attributeProductList")
-    public AttributeProductGroupDTO AttributeGroupToAttributeProductGroupDTO(AttributeGroup entity);
+    public AttributeProductDTO AttributeProductToAttributeProductDTO(AttributeProduct entity);
 
     public AttributeDTO AttributeToAttributeDTO(Attribute entity);
 
-    @Mapping(target = "attributeDTOList", source = "attributeSkuList")
-    public SkuDTO SkuToSkuDTO(Sku entity);
-//    @Mapping(target = "attributeSkuList", source = "attributeDTOList")
-//    public Sku SkuDTOToSku(SkuDTO dto);
 
-    @Mapping(target = "attributeId", source = "attributeId")
-    @Mapping(target = "name", source = "attributeName")
-    public AttributeProductDTO AttributeSkuToAttributeProductDTO(AttributeSku entity);
-
+    @Mapping(target = "attributeProductList", source = "attributeProductDTOList")
     public Sku SkuDTOToSku(SkuDTO dto);
+
+    @Mapping(target = "attributeProductDTOList", source = "attributeProductList")
+    public SkuDTO SkuToSkuDTO(Sku entity);
 //    @Mapping(target = "galleryList", source = "galleryList")
     public Product ProductDTOToProduct(ProductDTO dto);
 
     public Gallery GalleryDTOToGallery(GalleryDTO dto);
 
 }
-//Product
-//    List<AttributeProduct> attributeProductList;
-//
-//    List<Sku> skuList;
-//
-//    List<Gallery> galleryList;
-
-//ProductDTO
-//        List<GalleryDTO> galeryList;
-//        List<AttributeGroupDTO> attributeGroupDTOList; -> attributeProductList
-//        List<SkuDTO> skuDTOList; // chưa cần dùng
-//
-//        List<AttributeProductDTO> attributeDisplayFistList; // không caần

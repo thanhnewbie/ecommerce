@@ -14,6 +14,6 @@ public class SkuDTO {
     String thumbnail;
     Long price;
     Integer available;
-    List<AttributeProductDTO> attributeDTOList;
+    List<AttributeProductDTO> attributeProductDTOList;
 
 }

@@ -32,7 +32,7 @@ import java.util.List;
                 @NamedAttributeNode("image")
         }),
         @NamedSubgraph(name = "attributeProductListGraph", attributeNodes = {
-                @NamedAttributeNode("attributeId"),
+                @NamedAttributeNode("id"),
                 @NamedAttributeNode("attributeName"),
                 @NamedAttributeNode("value")
         }),
@@ -75,15 +75,12 @@ public class Product {
     Category category;
 
     @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
-
     List<AttributeProduct> attributeProductList;
 
     @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
-
     List<Sku> skuList;
 
     @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.ALL},fetch = FetchType.LAZY)
-
     List<Gallery> galleryList;
 
     @Column(name = "updated_at")

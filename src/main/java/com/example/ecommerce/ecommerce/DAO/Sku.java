@@ -11,13 +11,7 @@ import java.util.List;
         @NamedAttributeNode("id"),
         @NamedAttributeNode("price"),
         @NamedAttributeNode("pricePromotion"),
-        @NamedAttributeNode("thumbnail"),
-        @NamedAttributeNode(value = "attributeSkuList",  subgraph = "attributeSkuListGraph")},
-        subgraphs = {
-                @NamedSubgraph(name = "attributeSkuListGraph", attributeNodes = {
-                        @NamedAttributeNode("attributeName"),
-                        @NamedAttributeNode("value"),
-                })
+        @NamedAttributeNode("thumbnail")
         })
 @Data
 @AllArgsConstructor
@@ -28,7 +22,6 @@ public class Sku {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String value;
     Long price;
     @Column(name = "price_promotion")
     Long pricePromotion;

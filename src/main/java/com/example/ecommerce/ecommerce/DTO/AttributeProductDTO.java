@@ -14,8 +14,12 @@ import lombok.NoArgsConstructor;
 public class AttributeProductDTO {
     Long productId;
     Long attributeId;
-    String name;
+    Long skuId;
+    Long attributeGroupId;
+    String productName;
+    String attributeName;
     String value;
+    Integer isDisplay;
 }
 
 // thêm sản phẩm

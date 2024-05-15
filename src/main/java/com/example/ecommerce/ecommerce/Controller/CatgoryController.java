@@ -1,8 +1,7 @@
 package com.example.ecommerce.ecommerce.Controller;
 
-import com.example.ecommerce.ecommerce.DAO.Category;
 import com.example.ecommerce.ecommerce.DTO.CategoryDTO;
-import com.example.ecommerce.ecommerce.DTO.ProductOverviewDTO;
+import com.example.ecommerce.ecommerce.DTO.Custom.ProductOverviewDTO;
 import com.example.ecommerce.ecommerce.Service.CategoryService;
 import com.example.ecommerce.ecommerce.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ import java.util.List;
 public class CatgoryController {
     @Autowired
     CategoryService categoryService;
-//    @Autowired
-//    CategoryDTO categoryDTO;
     @Autowired
     ProductService productService;
 

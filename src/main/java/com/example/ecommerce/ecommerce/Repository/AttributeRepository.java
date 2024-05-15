@@ -18,7 +18,7 @@ public interface AttributeRepository extends JpaRepository<Attribute, Long> {
 //    @Query("select a From Attribute a join a.attributeProduct p where a.isDisplay = 1 and p.productId = :id")
 //    public List<Attribute> findAttributeByIsDisplay(Long id);
 
-    @Query("select a From Attribute a join a.attributeProduct p where a.isAttributeSku = 1")
-    public List<Attribute> getAttributeByCateId(Long cateID);
+//    @Query("select a From Attribute a join a.attributeProduct p where a.isAttributeSku = 1")
+//    public List<Attribute> getAttributeByCateId(Long cateID);
 
 }

@@ -1,24 +1,15 @@
 package com.example.ecommerce.ecommerce.Service;
 
-import com.example.ecommerce.ecommerce.DAO.AttributeProduct;
-import com.example.ecommerce.ecommerce.DAO.Gallery;
-import com.example.ecommerce.ecommerce.DAO.Product;
+import com.example.ecommerce.ecommerce.DAO.*;
 import com.example.ecommerce.ecommerce.DTO.*;
+import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
+import com.example.ecommerce.ecommerce.DTO.Custom.ProductOverviewDTO;
 import com.example.ecommerce.ecommerce.MapperConfig.MapperRemote;
 import com.example.ecommerce.ecommerce.Repository.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +30,8 @@ public class ProductService {
     AttributeGroupRepository attributeGroupRepository;
     @Autowired
     SkuRepository skuRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
 
     public List<ProductOverviewDTO> findAllProductByCate(Long cate){
@@ -49,23 +42,32 @@ public class ProductService {
     public ProductDTO findByProductId(Long id){
         ProductDTO productDTO = mapperRemote.ProductToProductDTO(productRepository.findById(id).orElseThrow());
 
-        List<AttributeProductGroupDTO> attributeGroupDTOList = attributeGroupRepository.findAttributeByProductId(id)
-                .stream().map(mapperRemote::AttributeGroupToAttributeProductGroupDTO)
-                .collect(Collectors.toList());
 
-        List<SkuDTO> skuList = skuRepository.findByProductId(id).stream().map(mapperRemote::SkuToSkuDTO).collect(Collectors.toList());
         List<AttributeProductDTO> attributeDTOList = attributeProductRepository.findAttributeByIsDisplay(id)
                         .stream().map(mapperRemote::AttributeProductToAttributeProductDTO)
                         .collect(Collectors.toList());
 
-        productDTO.setAttributeProductGroupDTOList(attributeGroupDTOList);
-        productDTO.setSkuDTOList(skuList);
         productDTO.setAttributeDisplayFistList(attributeDTOList);
 
         return productDTO;
     }
+
+    public List<AttributeGroupDTO> getAttributeProductGroupDTOByProductId(Long productId){
+        List<AttributeGroupDTO> attributeGroupDTOList = attributeGroupRepository.findAttributeGroupByProductId(productId)
+                .stream().map(mapperRemote::AttributeGroupToAttributeGroupDTO)
+                .collect(Collectors.toList());
+        attributeGroupDTOList.stream().forEach(e -> e.getAttributeDTOList().clear());
+        return attributeGroupDTOList;
+    }
+
+    public List<SkuDTO> getSkuByProductId(Long productId){
+        List<SkuDTO> skuList = skuRepository.findByProductId(productId).stream().map(mapperRemote::SkuToSkuDTO).collect(Collectors.toList());
+        return skuList;
+    }
+
+
     @Transactional
-    public void addProduct(Long categoryId, ProductDTO productDTO){
+    public void addCommonProduct(Long categoryId, ProductDTO productDTO){
         Product product = mapperRemote.ProductDTOToProduct(productDTO);// chuyển một phần sang product
 
 
@@ -74,12 +76,12 @@ public class ProductService {
         product.setGalleryList(galleryList);
 
 
-        List<AttributeProduct> attributeProductList = new ArrayList<>();
-        List<AttributeProductGroupDTO> attributeProductGroupDTOList = productDTO.getAttributeProductGroupDTOList();
-        attributeProductGroupDTOList.forEach(e -> attributeProductList.addAll(attributeGroupService.attributeGroupDTOToAttributeProductList(e)));
+        //List<AttributeProduct> attributeProductList = new ArrayList<>();
+        //List<AttributeProductGroupDTO> attributeProductGroupDTOList = productDTO.getAttributeProductGroupDTOList();
+        //attributeProductGroupDTOList.forEach(e -> attributeProductList.addAll(attributeGroupService.attributeGroupDTOToAttributeProductList(e)));
 
 
-        product.setAttributeProductList(attributeProductList);
+        //product.setAttributeProductList(attributeProductList);
         Product productTmp = productRepository.save(product);
 
         galleryList.forEach(g -> {
@@ -93,7 +95,36 @@ public class ProductService {
 
 
     }
+    @Transactional
+    public void addAttributeProduct(AttributeProductDTO attributeProductDTO){
+        AttributeProduct attributeProduct = mapperRemote.AttributeProductDTOToAttributeProduct(attributeProductDTO);
+        Long attributeProductId = attributeProductRepository.findAttributeProductId(attributeProductDTO.getProductId(), attributeProductDTO.getAttributeId());
+        if(attributeProductId != null) attributeProduct.setId(attributeProductId);
+        // khởi tạo các entity liên quan và set id cho nó
+        Attribute attribute = new Attribute();
+        AttributeGroup attributeGroup = new AttributeGroup();
+        Product product = new Product();
+        attribute.setId(attributeProductDTO.getAttributeId());
+        attributeGroup.setId(attributeProductDTO.getAttributeGroupId());
+        product.setId(attributeProductDTO.getProductId());
 
+        attributeProduct.setAttribute(attribute);
+        attributeProduct.setAttributeGroup(attributeGroup);
+        attributeProduct.setProduct(product);
+
+
+        attributeProductRepository.save(attributeProduct);
+
+    }
+    @Transactional
+    public void addSku(Long productId, SkuDTO skuDTO){
+        Sku sku = mapperRemote.SkuDTOToSku(skuDTO);
+        Product product = new Product();
+        product.setId(productId);
+
+        sku.setProduct(product);
+        skuRepository.save(sku);
+    }
 
 }
 

@@ -9,16 +9,16 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.List;
 
-@NamedEntityGraph(name = "AttributeProductList", attributeNodes = {
-        @NamedAttributeNode("id"),
-        @NamedAttributeNode("name"),
-        @NamedAttributeNode(value = "attributeProductList",  subgraph = "attributeProductListGraph")},
-        subgraphs = {
-        @NamedSubgraph(name = "attributeProductListGraph", attributeNodes = {
-                @NamedAttributeNode("attributeName"),
-                @NamedAttributeNode("value")
-        })
-})
+//@NamedEntityGraph(name = "AttributeProductList", attributeNodes = {
+//        @NamedAttributeNode("id"),
+//        @NamedAttributeNode("name"),
+//        @NamedAttributeNode(value = "attributeProductList",  subgraph = "attributeProductListGraph")},
+//        subgraphs = {
+//        @NamedSubgraph(name = "attributeProductListGraph", attributeNodes = {
+//                @NamedAttributeNode("attributeName"),
+//                @NamedAttributeNode("value")
+//        })
+//})
 @NamedEntityGraph(name = "AttributeList", attributeNodes = {
         @NamedAttributeNode("id"),
         @NamedAttributeNode("name"),

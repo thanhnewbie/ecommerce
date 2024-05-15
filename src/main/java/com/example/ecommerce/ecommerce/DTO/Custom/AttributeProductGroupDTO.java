@@ -1,5 +1,6 @@
-package com.example.ecommerce.ecommerce.DTO;
+package com.example.ecommerce.ecommerce.DTO.Custom;
 
+import com.example.ecommerce.ecommerce.DTO.AttributeProductDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;

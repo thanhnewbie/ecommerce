@@ -13,9 +13,10 @@ import java.util.List;
 
 @Repository
 public interface AttributeGroupRepository extends JpaRepository<AttributeGroup, Long> {
-    @EntityGraph(value = "AttributeProductList")
-    @Query("select g From AttributeGroup g join g.attributeProductList p where p.productId = :id")
-    List<AttributeGroup> findAttributeByProductId(Long id);
+
+//    @EntityGraph(value = "AttributeProductList")
+//    @Query("select g From AttributeGroup g join g.attributeProductList p where p.id = :id")
+//    List<AttributeGroup> findAttributeByProductId(Long id);
 
 //    @EntityGraph(value = "AddAttributeProductList")
 //    @Query("select g From AttributeGroup g join fetch g.attributeList l WHERE g.category.id = :id")
@@ -24,6 +25,10 @@ public interface AttributeGroupRepository extends JpaRepository<AttributeGroup, 
     @EntityGraph(value = "AttributeList")
     @Query("select g From AttributeGroup g join fetch g.attributeList l WHERE g.category.id = :id")
     List<AttributeGroup> findAttributeGroupByCateId(Long id);
+
+
+    @Query("select g From AttributeGroup g join fetch attributeProductList a WHERE a.product.id = :productId")
+    List<AttributeGroup> findAttributeGroupByProductId(Long productId);
 
 //    @EntityGraph(value = "AddAttributeProductList")
 //    @Query("select g From AttributeGroup g join fetch g.attributeList l join fetch g.category c where c.id = :id")

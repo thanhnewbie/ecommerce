@@ -19,9 +19,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name ="Attribute")
 @Table(name = "attributes")
-@NaturalIdCache
 public class Attribute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +43,7 @@ public class Attribute {
     @JoinColumn(name = "attributeGroupId")
     AttributeGroup attributeGroup;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.attribute", cascade = {CascadeType.MERGE, CascadeType.PERSIST})// mappedby là tên của đối tượng này ở phía many
-    List<AttributeProduct> attributeProduct;
+    @OneToMany(mappedBy = "attribute", cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)// mappedby là tên của đối tượng này ở phía many
+    List<AttributeProduct> attributeProductList;
 
 }
