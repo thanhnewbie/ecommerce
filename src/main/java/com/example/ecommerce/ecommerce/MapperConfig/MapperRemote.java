@@ -2,7 +2,6 @@ package com.example.ecommerce.ecommerce.MapperConfig;
 
 import com.example.ecommerce.ecommerce.DAO.*;
 import com.example.ecommerce.ecommerce.DTO.*;
-import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
 import com.example.ecommerce.ecommerce.DTO.Custom.ProductOverviewDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -46,6 +45,6 @@ public interface MapperRemote  {
 //    @Mapping(target = "galleryList", source = "galleryList")
     public Product ProductDTOToProduct(ProductDTO dto);
 
-    public Gallery GalleryDTOToGallery(GalleryDTO dto);
+    public ProductImage ProductImageDTOToProductImage(ProductImageDTO dto);
 
 }

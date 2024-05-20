@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GalleryDTO {
+public class ProductImageDTO {
     Long id;
-    String image;
+    String imageURL;
 }

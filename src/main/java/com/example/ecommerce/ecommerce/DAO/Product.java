@@ -1,6 +1,5 @@
 package com.example.ecommerce.ecommerce.DAO;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -81,7 +80,7 @@ public class Product {
     List<Sku> skuList;
 
     @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.ALL},fetch = FetchType.LAZY)
-    List<Gallery> galleryList;
+    List<ProductImage> productImageList;
 
     @Column(name = "updated_at")
     LocalDateTime updatedAt;

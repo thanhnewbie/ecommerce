@@ -1,6 +1,5 @@
 package com.example.ecommerce.ecommerce.DTO;
 
-import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,7 +21,7 @@ public class ProductDTO {
     String guaranteeInfo;
     String productInfo;
     String promotionInfo;
-    List<GalleryDTO> galeryList;
+    List<ProductImageDTO> galeryList;
     //List<AttributeProductGroupDTO> attributeProductGroupDTOList;
     List<SkuDTO> skuDTOList;
     List<AttributeProductDTO> attributeDisplayFistList;

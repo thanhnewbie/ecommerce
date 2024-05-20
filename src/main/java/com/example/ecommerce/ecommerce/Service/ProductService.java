@@ -2,7 +2,6 @@ package com.example.ecommerce.ecommerce.Service;
 
 import com.example.ecommerce.ecommerce.DAO.*;
 import com.example.ecommerce.ecommerce.DTO.*;
-import com.example.ecommerce.ecommerce.DTO.Custom.AttributeProductGroupDTO;
 import com.example.ecommerce.ecommerce.DTO.Custom.ProductOverviewDTO;
 import com.example.ecommerce.ecommerce.MapperConfig.MapperRemote;
 import com.example.ecommerce.ecommerce.Repository.*;
@@ -10,7 +9,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +17,7 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
     @Autowired
-    GalleryRepository galleryRepository;
+    ProductImageRepository productImageRepository;
     @Autowired
     AttributeProductRepository attributeProductRepository;
     @Autowired
@@ -69,32 +67,13 @@ public class ProductService {
     @Transactional
     public void addCommonProduct(Long categoryId, ProductDTO productDTO){
         Product product = mapperRemote.ProductDTOToProduct(productDTO);// chuyển một phần sang product
-
-
-        List<Gallery> galleryList = new ArrayList<>(productDTO.getGaleryList().stream().map(mapperRemote::GalleryDTOToGallery).collect(Collectors.toList()));
-        galleryList.forEach(gallery -> gallery.setProduct(product));
-        product.setGalleryList(galleryList);
-
-
-        //List<AttributeProduct> attributeProductList = new ArrayList<>();
-        //List<AttributeProductGroupDTO> attributeProductGroupDTOList = productDTO.getAttributeProductGroupDTOList();
-        //attributeProductGroupDTOList.forEach(e -> attributeProductList.addAll(attributeGroupService.attributeGroupDTOToAttributeProductList(e)));
-
-
-        //product.setAttributeProductList(attributeProductList);
+        Category category = new Category();
+        category.setId(categoryId);
+        product.setCategory(category);
         Product productTmp = productRepository.save(product);
-
-        galleryList.forEach(g -> {
-            g.setProduct(productTmp);
-            galleryRepository.save(g);
-        });
-//        attributeProductList.forEach(a -> {
-//            a.getId().setProduct(product);
-//            attributeProductRepository.save(a);
-//        });
-
-
     }
+
+
     @Transactional
     public void addAttributeProduct(AttributeProductDTO attributeProductDTO){
         AttributeProduct attributeProduct = mapperRemote.AttributeProductDTOToAttributeProduct(attributeProductDTO);
