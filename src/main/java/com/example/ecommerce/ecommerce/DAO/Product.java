@@ -23,12 +23,12 @@ import java.util.List;
         @NamedAttributeNode("guaranteeInfo"),
         @NamedAttributeNode("productInfo"),
         @NamedAttributeNode("promotionInfo"),
-        @NamedAttributeNode(value = "galleryList", subgraph = "galleryListGraph"),
+        @NamedAttributeNode(value = "productImageList", subgraph = "productImageGraph"),
         @NamedAttributeNode(value = "attributeProductList", subgraph = "attributeProductListGraph"),
         @NamedAttributeNode(value = "skuList", subgraph =  "skuListGraph"),
 },subgraphs = {
-        @NamedSubgraph(name = "galleryListGraph", attributeNodes = {
-                @NamedAttributeNode("image")
+        @NamedSubgraph(name = "productImageGraph", attributeNodes = {
+                @NamedAttributeNode("imageURL")
         }),
         @NamedSubgraph(name = "attributeProductListGraph", attributeNodes = {
                 @NamedAttributeNode("id"),

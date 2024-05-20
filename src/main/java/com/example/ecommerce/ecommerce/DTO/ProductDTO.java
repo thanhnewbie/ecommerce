@@ -21,7 +21,7 @@ public class ProductDTO {
     String guaranteeInfo;
     String productInfo;
     String promotionInfo;
-    List<ProductImageDTO> galeryList;
+    List<ProductImageDTO> productImageDTOList;
     //List<AttributeProductGroupDTO> attributeProductGroupDTOList;
     List<SkuDTO> skuDTOList;
     List<AttributeProductDTO> attributeDisplayFistList;

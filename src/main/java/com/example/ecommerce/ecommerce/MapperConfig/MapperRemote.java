@@ -23,7 +23,7 @@ public interface MapperRemote  {
     @Mapping(target = "price", source = "entity.priceLowest")
     public ProductOverviewDTO ProductToOverview(Product entity);
 
-    @Mapping(target = "galeryList", source = "entity.galleryList")
+    @Mapping(target = "productImageDTOList", source = "entity.productImageList")
     public ProductDTO ProductToProductDTO(Product entity);
 
     public AttributeProduct AttributeProductDTOToAttributeProduct(AttributeProductDTO dto);
