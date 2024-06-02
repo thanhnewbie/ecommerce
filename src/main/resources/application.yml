@@ -1,2 +1,28 @@
 storage:
   location: upload-dir
+jwt:
+  secret_key: hello
+  time_expiration: 86400000
+mail:
+  email: thacnit@gmail.com
+  password: Tn45652681.
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: Ov23ctEbYmDGR4wkgMhk
+            clientSecret: d5ddb20f89184b7638382723f9156b7d0c05194b
+            scope:
+              - user
+              - user:email
+          google:
+            client-id: 730185533709-fdfoihkrjqpda2toucecm7mr9kh94k9a.apps.googleusercontent.com
+            client-secret: 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
+            scope: profile, email
+
+
+
+# ...

@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.Array;
 
 @SpringBootApplication(/*exclude={DataSourceAutoConfiguration.class}*/)
+@ComponentScan(basePackages = "com.example.ecommerce.ecommerce")
 public class EcommerceApplication implements CommandLineRunner {
 	@Autowired
 	ProductService productService;

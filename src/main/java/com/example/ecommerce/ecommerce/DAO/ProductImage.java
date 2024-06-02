@@ -18,13 +18,16 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String imageURL;
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "productId")
     Product product;
 
+    @Column(name = "create_at")
     @CreationTimestamp
     LocalDateTime createAt;
 
+    @Column(name = "update_at")
     @CreationTimestamp
     LocalDateTime updateAt;
 }
