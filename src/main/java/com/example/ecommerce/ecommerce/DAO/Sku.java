@@ -34,4 +34,9 @@ public class Sku {
 
     @OneToMany(mappedBy = "sku",cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
     List<AttributeProduct> attributeProductList;
+
+    @OneToMany(mappedBy = "sku", fetch = FetchType.LAZY)
+    List<CartItem> cartItemList;
+    @OneToMany(mappedBy = "sku", fetch = FetchType.LAZY)
+    List<OrderItem> orderItemList;
 }

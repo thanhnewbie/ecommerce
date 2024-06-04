@@ -31,6 +31,11 @@ public class User {
     @OneToMany(mappedBy = "user",cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
     List<UserRole> userRoleList;
 
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
+    List<Cart> cartList;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    List<Order> orderList;
+
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
     List<AuthProvider> authProviderList;
 
